@@ -1,0 +1,14 @@
+{
+  "name": "yaca1.0",
+  "version": "1.0.0",
+  "description": "Front and back for YACASW",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kevin Osorio",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
