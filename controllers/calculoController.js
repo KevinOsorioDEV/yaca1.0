@@ -9,11 +9,11 @@ const {
 
 function calcular(req, res) {
   const { HED, HEN, HEDDF, HENDF, RNO, RDDF, RNDF } = req.body;
-  if (!HED || !HEN) {
-    return res
-      .status(400)
-      .json({ error: "Se requieren datos para realizar el calulo." });
-  }
+  // // if (!HED || !HEN) {
+  // //   return res
+  // //     .status(400)
+  // //     .json({ error: "Se requieren datos para realizar el calulo." });
+  // // }
 
   const VlHora = Hora(salariobase, dias);
   const AuxiloTransport = auxilios.transporte;
