@@ -1,7 +1,6 @@
 const { Hora, CalcularMonto, Deducciones } = require("../utils/function");
 const {
   porcentajes,
-  salariobase,
   dias,
   auxilios,
   deducciones,

@@ -1,5 +1,4 @@
 {
-  "salariobase": 1630600,
   "dias": 235,
   "deducciones": {
     "pension": 0.04,
@@ -14,5 +13,5 @@
     "RDDF": 1.75,
     "RNDF": 2.1
   },
-  "auxilios": { "transporte": 200000 }
+  "auxilios": { "conecitvidad": 200000 }
 }
