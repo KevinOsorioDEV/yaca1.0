@@ -44,7 +44,7 @@ function calcular(req, res) {
     TRDDF,
     TRNDF,
     TotalRecarosHoras,
-    SB,
+    "Salario Base": SB.data,
     AuxiloTransport,
     TotalIngreso,
     TotalDeducciones,
