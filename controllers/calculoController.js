@@ -27,9 +27,9 @@ function calcular(req, res) {
   let TRNDF = CalcularMonto(VlHora, RNDF, porcentajes.RNDF);
 
   let TotalRecarosHoras = THED + THEN + THEDDF + THENDF + TRNO + TRDDF + TRNDF;
-  let TotalIngreso = TotalRecarosHoras + salariobase + AuxiloTransport;
+  let TotalIngreso = TotalRecarosHoras + SB + AuxiloTransport;
   let TotalDeducciones = Deducciones(
-    TotalRecarosHoras + salariobase,
+    TotalRecarosHoras + SB,
     deducciones.pension,
     deducciones.salud
   );
@@ -44,7 +44,7 @@ function calcular(req, res) {
     TRDDF,
     TRNDF,
     TotalRecarosHoras,
-    salariobase,
+    SB,
     AuxiloTransport,
     TotalIngreso,
     TotalDeducciones,
