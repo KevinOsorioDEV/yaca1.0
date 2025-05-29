@@ -9,14 +9,14 @@ const {
 
 function calcular(req, res) {
   const { HED, HEN, HEDDF, HENDF, RNO, RDDF, RNDF, SB } = req.body;
-  // // if (!HED || !HEN) {
-  // //   return res
-  // //     .status(400)
-  // //     .json({ error: "Se requieren datos para realizar el calulo." });
-  // // }
+  if (!HED || !HEN) {
+    return res
+      .status(400)
+      .json({ error: "Se requieren datos para realizar el calulo." });
+  }
 
   const VlHora = Hora(SB, dias);
-  const AuxiloTransport = auxilios.transporte;
+  const AuxilioConectividad = auxilios.conectividad;
 
   let THED = CalcularMonto(VlHora, HED, porcentajes.HED);
   let THEN = CalcularMonto(VlHora, HEN, porcentajes.HEN);
@@ -27,7 +27,7 @@ function calcular(req, res) {
   let TRNDF = CalcularMonto(VlHora, RNDF, porcentajes.RNDF);
 
   let TotalRecarosHoras = THED + THEN + THEDDF + THENDF + TRNO + TRDDF + TRNDF;
-  let TotalIngreso = TotalRecarosHoras + SB + AuxiloTransport;
+  let TotalIngreso = TotalRecarosHoras + SB + AuxilioConectividad;
   let TotalDeducciones = Deducciones(
     TotalRecarosHoras + SB,
     deducciones.pension,
@@ -45,7 +45,7 @@ function calcular(req, res) {
     TRNDF,
     TotalRecarosHoras,
     "Salario Base": SB.data,
-    AuxiloTransport,
+    AuxilioConectividad,
     TotalIngreso,
     TotalDeducciones,
     NetoPagar,
