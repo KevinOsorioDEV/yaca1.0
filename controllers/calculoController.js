@@ -8,14 +8,14 @@ const {
 } = require("../utils/DatosRemuneracion.json");
 
 function calcular(req, res) {
-  const { HED, HEN, HEDDF, HENDF, RNO, RDDF, RNDF } = req.body;
+  const { HED, HEN, HEDDF, HENDF, RNO, RDDF, RNDF, SB } = req.body;
   // // if (!HED || !HEN) {
   // //   return res
   // //     .status(400)
   // //     .json({ error: "Se requieren datos para realizar el calulo." });
   // // }
 
-  const VlHora = Hora(salariobase, dias);
+  const VlHora = Hora(SB, dias);
   const AuxiloTransport = auxilios.transporte;
 
   let THED = CalcularMonto(VlHora, HED, porcentajes.HED);
