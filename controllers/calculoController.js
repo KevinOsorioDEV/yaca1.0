@@ -1,38 +1,41 @@
-const { Hora, CalcularMonto, Deducciones } = require("../utils/function");
+const { calculo, CalcularMonto, Deducciones } = require("../utils/function");
 const {
   porcentajes,
   dias,
+  horas,
   auxilios,
   deducciones,
 } = require("../utils/DatosRemuneracion.json");
 
 function calcular(req, res) {
-  const { HED, HEN, HEDDF, HENDF, RNO, RDDF, RNDF, SB } = req.body;
+  const { HED, HEN, HEDDF, HENDF, RNO, RDDF, RNDF, SB, DT } = req.body;
   if (!HED || !HEN) {
     return res
       .status(400)
       .json({ error: "Se requieren datos para realizar el calulo." });
   }
 
-  const VlHora = Hora(SB, dias);
-  const AuxilioConectividad = auxilios.conectividad;
+  const valorDia = calculo(SB, dias);
+  const valorHora = calculo(SB, horas);
+  const AuxilioConectividad = calculo(auxilios.conecitvidad, dias) * DT;
 
-  let THED = CalcularMonto(VlHora, HED, porcentajes.HED);
-  let THEN = CalcularMonto(VlHora, HEN, porcentajes.HEN);
-  let THEDDF = CalcularMonto(VlHora, HEDDF, porcentajes.HEDDF);
-  let THENDF = CalcularMonto(VlHora, HENDF, porcentajes.HENDF);
-  let TRNO = CalcularMonto(VlHora, RNO, porcentajes.RNO);
-  let TRDDF = CalcularMonto(VlHora, RDDF, porcentajes.RDDF);
-  let TRNDF = CalcularMonto(VlHora, RNDF, porcentajes.RNDF);
+  let THED = CalcularMonto(valorHora, HED, porcentajes.HED);
+  let THEN = CalcularMonto(valorHora, HEN, porcentajes.HEN);
+  let THEDDF = CalcularMonto(valorHora, HEDDF, porcentajes.HEDDF);
+  let THENDF = CalcularMonto(valorHora, HENDF, porcentajes.HENDF);
+  let TRNO = CalcularMonto(valorHora, RNO, porcentajes.RNO);
+  let TRDDF = CalcularMonto(valorHora, RDDF, porcentajes.RDDF);
+  let TRNDF = CalcularMonto(valorHora, RNDF, porcentajes.RNDF);
 
   let TotalRecarosHoras = THED + THEN + THEDDF + THENDF + TRNO + TRDDF + TRNDF;
-  let TotalIngreso = TotalRecarosHoras + SB + AuxilioConectividad;
+  console.log(TotalRecarosHoras);
+  let TotalIngreso = TotalRecarosHoras + DT * valorDia;
   let TotalDeducciones = Deducciones(
-    TotalRecarosHoras + SB,
+    TotalIngreso,
     deducciones.pension,
     deducciones.salud
   );
-  let NetoPagar = TotalIngreso - TotalDeducciones;
+  let NetoPagar = TotalIngreso + AuxilioConectividad - TotalDeducciones;
 
   res.json({
     THED,
@@ -43,7 +46,6 @@ function calcular(req, res) {
     TRDDF,
     TRNDF,
     TotalRecarosHoras,
-    "Salario Base": SB.data,
     AuxilioConectividad,
     TotalIngreso,
     TotalDeducciones,

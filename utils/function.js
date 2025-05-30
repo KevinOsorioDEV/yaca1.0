@@ -1,6 +1,6 @@
-function Hora(salario, dias) {
-  var hora = salario / dias;
-  return Math.ceil(hora);
+function calculo(salario, diaHora) {
+  var valorDia = salario / diaHora;
+  return Math.ceil(valorDia);
 }
 
 function Deducciones(salario, pension, salud) {
@@ -13,4 +13,4 @@ function CalcularMonto(valorHora, totalHora, porcentaje) {
   return valorTotalHora;
 }
 
-module.exports = { Hora, Deducciones, CalcularMonto };
+module.exports = { calculo, Deducciones, CalcularMonto };

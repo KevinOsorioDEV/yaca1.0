@@ -1,5 +1,6 @@
 {
-  "dias": 235,
+  "dias": 30,
+  "horas": 230,
   "deducciones": {
     "pension": 0.04,
     "salud": 0.04
@@ -10,8 +11,8 @@
     "HEDDF": 2,
     "HENDF": 2.5,
     "RNO": 0.35,
-    "RDDF": 1.75,
-    "RNDF": 2.1
+    "RDDF": 0.75,
+    "RNDF": 1.1
   },
   "auxilios": { "conecitvidad": 200000 }
 }
